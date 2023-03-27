@@ -1,7 +1,0 @@
-{
-  "name": "unicef-pdca",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "angular"
-}
