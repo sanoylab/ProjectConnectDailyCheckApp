@@ -94,6 +94,13 @@ if (!gotTheLock) {
     autoUpdater.checkForUpdates()
   }, 60000)
 
+  autoUpdater.setFeedURL({
+    provider: 'github',
+    repo: 'ProjectConnectDailyCheckApp',
+    owner: 'sanoylab',
+    private: true,
+    token: process.env.GT_TOKEN
+  })
 
   autoUpdater.on("update-downloaded", (_event, releaseNotes, releaseName) => {
     const dialogOpts = {
