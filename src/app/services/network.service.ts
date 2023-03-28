@@ -7,7 +7,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class NetworkService {
-  accessServiceUrl = 'https://ipinfo.io?token=9906baf67eda8b';
+  accessServiceUrl = 'https://ipinfo.io';
   headers: any;
   options: any;
   currentAccessInformation: any;

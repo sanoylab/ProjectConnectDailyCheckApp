@@ -1,11 +1,7 @@
 @import '../../theme/variables.scss';
 .search-label{
-  padding: 20px 5px;  
+  padding: 20px 30px;  
   color: $light-text2;
-}
-.search-label-error{
-  padding: 20px 5px;  
-  color: #b00f0f;
 }
 .ionList{
   padding: 10px 30px;
@@ -21,9 +17,6 @@
   ion-icon{
     color: #e2e2e2;
   }
-}
-select {
-  pointer-events: auto;
 }
 .searchTerm {
   width: 100%;
@@ -41,33 +34,6 @@ select {
   --keyboard-offset: 0px;
   
 }
-
-.searchCountry {
-  width: 100%;
-  border: 3px solid $color-blue;
- 
-  padding: 5px;
-  border-radius: 5px ;
-  outline: none;
-  color: #9DBFAF;
-}
-.searchCountry:hover{
-  color: #00B4CC;
-  --offset-top: 0px;
-  --offset-bottom: 0px;
-  --keyboard-offset: 0px;
-  
-}
-
-.bottom-layout{
-  position: absolute; 
-  padding: 0px 20px;
-  width: 100%;
-  text-align: center;
-}
-
-
-
 .searchButton {
 width: 40px;
 height: 40px;

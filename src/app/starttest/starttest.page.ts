@@ -164,7 +164,6 @@ export class StarttestPage implements OnInit {
       this.connectionStatus = "success";     
       this.networkService.getAccessInformation().subscribe(results => {
         this.accessInformation = results;
-        
         if(this.loading.isStillLoading()){
           this.loading.dismiss();
         }
