@@ -1,14 +1,15 @@
 {
   "name": "unicef-pdca",
-  "version": "1.0.2",
+  "version": "1.0.1",
   "description": "Unicef Project Connect Daily Check App",
   "author": {
-    "name": "Unicef"
+    "name": "Unicef",
+    "email": "kajal.mondol@ericsson.com"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/sanoylab/ProjectConnectDailyCheckApp"
-  },
+    "url": "https://github.com/unicef/project-connect-daily-check-app" 
+},
   "license": "MIT",
   "main": "build/src/index.js",
   "scripts": {
@@ -24,7 +25,6 @@
     "@capacitor-community/electron": "^4.1.0",
     "auto-launch": "^5.0.5",
     "chokidar": "~3.5.2",
-    "dotenv": "^16.0.3",
     "electron-is-dev": "~2.0.0",
     "electron-serve": "^1.1.0",
     "electron-unhandled": "^3.0.2",
@@ -33,7 +33,7 @@
     "fs-extra": "^10.0.1"
   },
   "devDependencies": {
-    "electron": "13.1.9",
+    "electron": "^14.0.0",
     "electron-builder": "~20.44.4",
     "electron-rebuild": "^3.2.3",
     "typescript": "~4.3.5"

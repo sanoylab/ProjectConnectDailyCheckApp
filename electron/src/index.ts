@@ -5,8 +5,6 @@ import { app, MenuItem, ipcMain, dialog } from 'electron';
 import electronIsDev from 'electron-is-dev';
 import unhandled from 'electron-unhandled';
 import { autoUpdater } from 'electron-updater';
-require('dotenv').config();
-
 import fs from 'fs-extra';
 import { ElectronCapacitorApp, setupContentSecurityPolicy, setupReloadWatcher } from './setup';
 const gotTheLock = app.requestSingleInstanceLock();
@@ -14,7 +12,7 @@ const gotTheLock = app.requestSingleInstanceLock();
 unhandled();
 let isQuiting = false;
 let mainWindow = null;
-
+let isDownloaded = false;
 
 // Define our menu templates (these are optional)
 const trayMenuTemplate: (MenuItemConstructorOptions | MenuItem)[] = [
@@ -95,20 +93,9 @@ if (!gotTheLock) {
   setInterval(() => {
     autoUpdater.checkForUpdates()
   }, 60000)
-  //PLEASE REMOVE THIS AFTER TESTING
 
-  autoUpdater.setFeedURL({
-    provider: 'github',
-    repo: 'ProjectConnectDailyCheckApp',
-    owner: 'sanoylab',
-    private: true,
-    token: process.env.GT_TOKEN
-  })
-
-  //REMOVE END
 
   autoUpdater.on("update-downloaded", (_event, releaseNotes, releaseName) => {
-
     const dialogOpts = {
       type: 'info',
       buttons: ['Restart', 'Later'],
@@ -116,14 +103,12 @@ if (!gotTheLock) {
       message: process.platform === 'win32' ? releaseNotes : releaseName,
       detail: 'A new version Project Connect Daily Check App has been downloaded. Restart the application to apply the updates.'
     };
-   /*
-    dialog.showMessageBox(dialogOpts).then((returnValue) => {
-
-      if (returnValue.response === 0) autoUpdater.quitAndInstall(true, true)
-    })
-    */
-    autoUpdater.quitAndInstall(true, true)
-
+    if (isDownloaded === false) {
+      dialog.showMessageBox(dialogOpts).then((returnValue) => {
+        isDownloaded = true;
+        if (returnValue.response === 0) autoUpdater.quitAndInstall(true, true)
+      })
+    }
   });
 
 
@@ -174,5 +159,3 @@ app.on('activate', async function () {
 ipcMain.addListener('closeFromUi', (ev) => {
   myCapacitorApp.getMainWindow().hide();
 });
-
-

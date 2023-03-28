@@ -126,13 +126,7 @@ export class ElectronCapacitorApp {
       y: this.mainWindowState.y,
       width: this.mainWindowState.width,
       height: this.mainWindowState.height,
-      //frame: false,
       titleBarStyle: 'hidden',
-
-      //titleBarStyle: 'hidden',
-      fullscreenWindowTitle: true,
-      title: '',
-      
       // titleBarOverlay: true,
       maximizable: false,
       minimizable: false,
@@ -140,22 +134,17 @@ export class ElectronCapacitorApp {
       transparent: true, 
       webPreferences: {
         nodeIntegration: true,
-        contextIsolation: false,
-      
-        
+        contextIsolation: true,
         // Use preload to inject the electron varriant overrides for capacitor plugins.
         // preload: join(app.getAppPath(), "node_modules", "@capacitor-community", "electron", "dist", "runtime", "electron-rt.js"),
-        preload: preloadPath
-
-        
+        preload: preloadPath,
       },
     });
     this.mainWindowState.manage(this.MainWindow);
+
     if (this.CapacitorFileConfig.backgroundColor) {
       this.MainWindow.setBackgroundColor(this.CapacitorFileConfig.electron.backgroundColor);
     }
-//this.MainWindow.setFullScreen(true);
-//this.MainWindow.setWindowButtonVisibility(false);
 
     // If we close the main window with the splashscreen enabled we need to destory the ref.
     this.MainWindow.on('closed', () => {
@@ -163,8 +152,7 @@ export class ElectronCapacitorApp {
         this.SplashScreen.getSplashWindow().close();
       }
     });
-   
-
+    
 
     // When the tray icon is enabled, setup the options.
     if (this.CapacitorFileConfig.electron?.trayIconAndMenuEnabled) {
@@ -214,6 +202,7 @@ export class ElectronCapacitorApp {
     } else {
       this.loadMainWindow(this);
     }
+
     // Security
     this.MainWindow.webContents.setWindowOpenHandler((details) => {
       if (!details.url.includes(this.customScheme)) {
@@ -227,8 +216,6 @@ export class ElectronCapacitorApp {
         event.preventDefault();
       }
     });
-
-    
     // this.MainWindow.on('close',(event)=>{
     //   if(!isQuiting){
     //     event.preventDefault();
@@ -256,8 +243,6 @@ export class ElectronCapacitorApp {
         CapElectronEventEmitter.emit('CAPELECTRON_DeeplinkListenerInitialized', '');
       }, 400);
     });
-   // this.MainWindow.webContents.openDevTools()
-
 
     if (!gotTheLock) {
       app.quit();
